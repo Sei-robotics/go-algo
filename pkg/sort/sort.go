@@ -5,14 +5,36 @@ import (
 	"fmt"
 )
 
-type SortableCollection interface {
-	Len() int
+type Lessable interface {
+	LessThan(thanThis Lessable) bool
+}
 
-	Less(this int, that int) bool
+func SimpleInsertionSort[T Lessable](arr []T) {
+	for i := 1; i < len(arr); i++ {
+		val := arr[i]
+		j := i - 1
+		for j >= 0 && val.LessThan(arr[j]) {
+			arr[j+1] = arr[j]
+			j -= 1
+		}
+		arr[j+1] = val
+	}
+}
 
-	At(i int)
+type Numeric interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~float32 | ~float64
+}
 
-	Copy(start int, end int) SortableCollection
+func SimpleInsertionSortNumeric[T Numeric](arr []T) {
+	for i := 1; i < len(arr); i++ {
+		val := arr[i]
+		j := i - 1
+		for j >= 0 && arr[j] > val {
+			arr[j+1] = arr[j]
+			j -= 1
+		}
+		arr[j+1] = val
+	}
 }
 
 func SimpleInsertionSortInt(arr []int) {

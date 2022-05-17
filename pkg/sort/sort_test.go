@@ -7,11 +7,19 @@ import (
 )
 import "gotest.tools/v3/assert"
 
-func Test_InsertSort(t *testing.T) {
+func Test_SimpleInsertSortInt(t *testing.T) {
 
 	arr := []int{5, 2, 4, 6, 1, 3}
 	sortedArr := []int{1, 2, 3, 4, 5, 6}
 	SimpleInsertionSortInt(arr)
+	checkIntArrays(t, arr, sortedArr)
+
+}
+
+func Test_SimpleInsertSortNumeric(t *testing.T) {
+	arr := []int{5, 2, 4, 6, 1, 3}
+	sortedArr := []int{1, 2, 3, 4, 5, 6}
+	SimpleInsertionSortNumeric[int](arr)
 	checkIntArrays(t, arr, sortedArr)
 
 }
